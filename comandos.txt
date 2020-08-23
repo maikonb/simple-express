@@ -1,0 +1,58 @@
+maikon@worknote$ #kubectl get pods
+maikon@worknote$ kubectl get pods
+NAME                            READY   STATUS    RESTARTS   AGE
+my-app-2-6fdb878d94-glczn       1/1     Running   0          53m
+reverseproxy-7658b6d576-t4r6r   1/1     Running   0          47m
+
+maikon@worknote$ kubectl exec -it my-app-2-6fdb878d94-glczn bash
+
+root@my-app-2-6fdb878d94-glczn:/usr/src/app# curl http://my-app-2-svc:8080/health
+Hello World!root@my-app-2-6fdb878d94-glczn:/usr/src/app# 
+root@my-app-2-6fdb878d94-glczn:/usr/src/app# exit
+exit
+
+maikon@worknote$ kubectl describe services
+Name:              kubernetes
+Namespace:         default
+Labels:            component=apiserver
+                   provider=kubernetes
+Annotations:       <none>
+Selector:          <none>
+Type:              ClusterIP
+IP:                10.100.0.1
+Port:              https  443/TCP
+TargetPort:        443/TCP
+Endpoints:         172.31.20.59:443,172.31.5.218:443
+Session Affinity:  None
+Events:            <none>
+
+
+Name:              my-app-2-svc
+Namespace:         default
+Labels:            app=my-app-2
+Annotations:       kubectl.kubernetes.io/last-applied-configuration:
+                     {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"my-app-2"},"name":"my-app-2-svc","namespace":"default","...
+Selector:          app=my-app-2
+Type:              ClusterIP
+IP:                10.100.114.27
+Port:              <unset>  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         172.31.23.125:8080
+Session Affinity:  None
+Events:            <none>
+
+
+Name:              reverseproxy-svc
+Namespace:         default
+Labels:            service=reverseproxy
+Annotations:       kubectl.kubernetes.io/last-applied-configuration:
+                     {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"service":"reverseproxy"},"name":"reverseproxy-svc","namespace"...
+Selector:          service=reverseproxy
+Type:              ClusterIP
+IP:                10.100.216.21
+Port:              8080  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         172.31.22.209:8080
+Session Affinity:  None
+Events:            <none>
+
