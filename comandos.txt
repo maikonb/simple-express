@@ -8,6 +8,12 @@ maikon@worknote$ kubectl exec -it my-app-2-6fdb878d94-glczn bash
 
 root@my-app-2-6fdb878d94-glczn:/usr/src/app# curl http://my-app-2-svc:8080/health
 Hello World!root@my-app-2-6fdb878d94-glczn:/usr/src/app# 
+
+# fetch by the service name
+root@my-app-2-6fdb878d94-glczn:/usr/src/app# curl http://reverseproxy-svc:8080/api/health
+Hello World!root@my-app-2-6fdb878d94-glczn:/usr/src/app# exit
+
+
 root@my-app-2-6fdb878d94-glczn:/usr/src/app# exit
 exit
 
