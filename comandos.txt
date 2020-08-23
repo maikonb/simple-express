@@ -62,3 +62,10 @@ Endpoints:         172.31.22.209:8080
 Session Affinity:  None
 Events:            <none>
 
+
+
+
+maikon@worknote$ kubectl  delete -f deploy/deployment.yaml
+maikon@worknote$ kubectl  delete -f deploy/service.yaml
+maikon@worknote$ kubectl  delete -f reverse-proxy/deploy/deployment.yaml
+maikon@worknote$ kubectl  delete -f reverse-proxy/deploy/service.yaml
